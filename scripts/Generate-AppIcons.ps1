@@ -139,7 +139,7 @@ try {
     Invoke-Magick @(
         $sourcePath,
         '-trim', '+repage',
-        '-resize', '230x230',
+        '-resize', '246x246',
         '-gravity', 'center',
         '-background', 'none',
         '-extent', '256x256',
@@ -148,7 +148,7 @@ try {
     )
     Invoke-Magick @(
         $icoMaster,
-        '-define', 'icon:auto-resize=256,128,64,48,32,24,20,16',
+        '-define', 'icon:auto-resize=256,128,96,72,64,48,32,24,16',
         (Join-Path $assetsPath 'icon.ico')
     )
 }
