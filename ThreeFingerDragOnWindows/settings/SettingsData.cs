@@ -88,7 +88,7 @@ public class SettingsData{
 
     public bool RunElevated { get; set; } = false;
 
-    public bool ShowSystemTrayIcon { get; set; } = true;
+    public bool ShowSystemTrayIcon { get; set; } = false;
 
     public bool RecordLogs { get; set; } = false;
 
