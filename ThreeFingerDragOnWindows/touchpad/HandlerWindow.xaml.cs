@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Timers;
+using H.NotifyIcon.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using ThreeFingerDragEngine.utils;
@@ -27,6 +28,7 @@ public sealed partial class HandlerWindow : Window {
         _app = app;
         _contactsManager = new ContactsManager(this);
         _threeFingersDrag = new ThreeFingerDrag();
+        SetTaskbarIconVisible(App.SettingsData.ShowSystemTrayIcon);
 
         // Let the _handlerWindow to be defined in App.xaml.cs before initializing the source
         Utils.runOnMainThreadAfter(100, () => {
@@ -44,6 +46,11 @@ public sealed partial class HandlerWindow : Window {
     private void QuitApp(object sender, ExecuteRequestedEventArgs e){
         Logger.Log("Quitting App from HandlerWindow TaskbarIcon");
         _app.Quit();
+    }
+
+    public void SetTaskbarIconVisible(bool visible){
+        TaskbarIcon.TrayIcon.Visibility = visible ? IconVisibility.Visible : IconVisibility.Hidden;
+        Logger.Log($"Taskbar icon visible: {visible}");
     }
 
 
