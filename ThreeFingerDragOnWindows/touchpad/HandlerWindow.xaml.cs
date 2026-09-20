@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Timers;
+using H.NotifyIcon.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using ThreeFingerDragOnWindows.drag;
@@ -36,6 +37,7 @@ public sealed partial class HandlerWindow : Window {
             App.SettingsData.DoubleTapDragLockEnabled);
         _threeFingersDrag = new ThreeFingerDrag(_dragButtonCoordinator);
         Closed += (_, _) => ShutdownInputEngines();
+        SetTaskbarIconVisible(App.SettingsData.ShowSystemTrayIcon);
 
         // Let the _handlerWindow to be defined in App.xaml.cs before initializing the source
         Utils.runOnMainThreadAfter(100, () => {
@@ -71,6 +73,11 @@ public sealed partial class HandlerWindow : Window {
         _doubleTapDragLock.Dispose();
         _threeFingersDrag.Dispose();
         _dragButtonCoordinator.ForceRelease("handler-window-closed");
+    }
+
+    public void SetTaskbarIconVisible(bool visible){
+        TaskbarIcon.TrayIcon.Visibility = visible ? IconVisibility.Visible : IconVisibility.Hidden;
+        Logger.Log($"Taskbar icon visible: {visible}");
     }
 
 
