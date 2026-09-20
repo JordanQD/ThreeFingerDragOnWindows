@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Timers;
-using H.NotifyIcon.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
 using ThreeFingerDragEngine.utils;
@@ -49,7 +48,8 @@ public sealed partial class HandlerWindow : Window {
     }
 
     public void SetTaskbarIconVisible(bool visible){
-        TaskbarIcon.TrayIcon.Visibility = visible ? IconVisibility.Visible : IconVisibility.Hidden;
+        TaskbarIcon.ForceCreate(enablesEfficiencyMode: false);
+        TaskbarIcon.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
         Logger.Log($"Taskbar icon visible: {visible}");
     }
 
